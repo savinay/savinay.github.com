@@ -21,15 +21,24 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "/sendEmail",
-                type: "POST",
+                type: 'POST',
+                url: 'https://mandrillapp.com/api/1.0/messages/send.json',
                 data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    message: message
+                    'key': 'o2_eZLXnlK1JeXvabw546g',
+                    'message': {
+                        'from_email': email,
+                        'to':[
+                            {
+                                'email': 'savinay.90@gmail.com',
+                                'name': 'Savinay Narendra',
+                                'type': 'to'
+                            }
+                        ],
+                        'autotext': 'true',
+                        'subject': 'New Email from Personal Website',
+                        'html': message
+                    }
                 },
-                cache: false,
                 success: function() {
                     // Enable button & show success message
                     $("#btnSubmit").attr("disabled", false);
